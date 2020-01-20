@@ -359,7 +359,7 @@ class Fuzzer(Model):
   additional_environment_string = TextProperty()
 
   # Column specification for stats.
-  stats_columns = StringProperty()
+  stats_columns = TextProperty()
 
   # Helpful descriptions for the stats_columns. In a yaml format.
   stats_column_descriptions = TextProperty(indexed=False)
@@ -383,7 +383,7 @@ class Testcase(Model):
   crash_type = StringProperty()
 
   # Crashing address.
-  crash_address = StringProperty()
+  crash_address = TextProperty()
 
   # First x stack frames.
   crash_state = StringProperty()
@@ -396,9 +396,9 @@ class Testcase(Model):
 
   # Blobstore keys for various things like original testcase, minimized
   # testcase, etc.
-  fuzzed_keys = StringProperty()
-  minimized_keys = StringProperty()
-  minidump_keys = StringProperty()
+  fuzzed_keys = TextProperty()
+  minimized_keys = TextProperty()
+  minidump_keys = TextProperty()
 
   # Tracking issue tracker bug. One bug number per line (future extension).
   bug_information = StringProperty()
@@ -425,8 +425,8 @@ class Testcase(Model):
   crash_revision = ndb.IntegerProperty()
 
   # The file on the bot that generated the testcase.
-  original_absolute_path = StringProperty(default='')
-  absolute_path = StringProperty()
+  original_absolute_path = TextProperty(default='')
+  absolute_path = TextProperty()
 
   # Minimized argument list.
   minimized_arguments = TextProperty(default='', indexed=False)
@@ -438,13 +438,13 @@ class Testcase(Model):
   job_type = StringProperty()
 
   # Original job queue used for tasks created for this testcase.
-  queue = StringProperty()
+  queue = TextProperty()
 
   # State representing whether the fuzzed or minimized testcases are archived.
   archive_state = ndb.IntegerProperty(default=0, indexed=False)
 
   # File name of the original uploaded archive.
-  archive_filename = StringProperty()
+  archive_filename = TextProperty()
 
   # Is this a binary file?
   binary_flag = ndb.BooleanProperty(default=False, indexed=False)
@@ -477,7 +477,7 @@ class Testcase(Model):
   group_bug_information = ndb.IntegerProperty(default=0)
 
   # Fake user interaction sequences like key clicks, mouse movements, etc.
-  gestures = StringProperty(repeated=True)
+  gestures = TextProperty(repeated=True)
 
   # ASAN redzone size in bytes.
   redzone = ndb.IntegerProperty(default=128, indexed=False)
@@ -1081,10 +1081,10 @@ class ReportMetadata(Model):
   product = StringProperty(default='')
 
   # Version.
-  version = StringProperty(default='')
+  version = TextProperty(default='')
 
   # Key to minidump previously written to blobstore.
-  minidump_key = StringProperty(default='')
+  minidump_key = TextProperty(default='')
 
   # Processed crash bytes.
   serialized_crash_stack_frames = ndb.BlobProperty(default='', indexed=False)
@@ -1093,7 +1093,7 @@ class ReportMetadata(Model):
   testcase_id = StringProperty(default='')
 
   # Id of the associated bot.
-  bot_id = StringProperty(default='')
+  bot_id = TextProperty(default='')
 
   # Optional upload params, stored as a JSON object.
   optional_params = TextProperty(indexed=False)
@@ -1309,7 +1309,7 @@ class Trial(Model):
   probability = ndb.FloatProperty()
 
   # Additional arguments to apply if selected.
-  app_args = StringProperty()
+  app_args = TextProperty()
 
 
 # TODO(ochang): Make this generic.
